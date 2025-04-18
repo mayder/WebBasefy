@@ -116,13 +116,25 @@ class Usuario extends ActiveRecord implements IdentityInterface
     // Encontra identidade pelo ID (usado em sessões)
     public static function findIdentity($id)
     {
-        return self::findOne(['id' => $id, 'status' => true, 'admin' => true]);
+        $query = self::find()->where(['id' => $id, 'status' => true]);
+
+        if (Yii::$app->id === 'app-backend') {
+            $query->andWhere(['admin' => true]);
+        }
+
+        return $query->one();
     }
 
     // Encontra identidade por access token (API futuramente)
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return self::findOne(['access_token' => $token, 'status' => true, 'admin' => true]);
+        $query = self::find()->where(['access_token' => $token, 'status' => true]);
+
+        if (Yii::$app->id === 'app-backend') {
+            $query->andWhere(['admin' => true]);
+        }
+
+        return $query->one();
     }
 
     // Retorna o ID do usuário (obrigatório)
@@ -145,7 +157,13 @@ class Usuario extends ActiveRecord implements IdentityInterface
 
     public static function findByEmail($email)
     {
-        return self::findOne(['email' => $email, 'status' => true, 'admin' => true]);
+        $query = self::find()->where(['email' => $email, 'status' => true]);
+
+        if (Yii::$app->id === 'app-backend') {
+            $query->andWhere(['admin' => true]);
+        }
+
+        return $query->one();
     }
 
     public function validatePassword($senha)
