@@ -12,6 +12,8 @@ use yii\web\IdentityInterface;
  * @property int $id
  * @property string $nome
  * @property string $email
+ * @property string|null $foto_perfil 
+ * @property int|null $idioma_id 
  * @property string|null $senha_hash
  * @property string|null $auth_key
  * @property string|null $token_verificacao_email
@@ -22,6 +24,16 @@ use yii\web\IdentityInterface;
  * @property bool $admin
  * @property string|null $ultimo_acesso
  * @property string $data_cadastro
+ * 
+ * @property ClienteUsuario[] $clienteUsuarios 
+ * @property Cliente[] $clientes 
+ * @property Idioma $idioma 
+ * @property Mensagem[] $mensagems 
+ * @property Mensagem[] $mensagems0 
+ * @property NotificacaoSistema[] $notificacaoSistemas 
+ * @property TicketResposta[] $ticketRespostas 
+ * @property TicketVoto[] $ticketVotos 
+ * @property Ticket[] $tickets 
  */
 class Usuario extends ActiveRecord implements IdentityInterface
 {
@@ -48,15 +60,17 @@ class Usuario extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['senha_hash', 'auth_key', 'access_token', 'token_reset_senha', 'expira_token_reset', 'ultimo_acesso'], 'default', 'value' => null],
+            [['foto_perfil', 'idioma_id', 'senha_hash', 'auth_key', 'token_verificacao_email', 'access_token', 'token_reset_senha', 'expira_token_reset', 'ultimo_acesso'], 'default', 'value' => null],
             [['status'], 'default', 'value' => 1],
             [['admin'], 'default', 'value' => 0],
             [['nome', 'email', 'data_cadastro'], 'required'],
+            [['idioma_id'], 'integer'],
             [['expira_token_reset', 'ultimo_acesso', 'data_cadastro'], 'safe'],
             [['status', 'admin'], 'boolean'],
-            [['nome', 'email'], 'string', 'max' => 45],
+            [['nome', 'email', 'foto_perfil'], 'string', 'max' => 45],
             [['senha_hash', 'token_verificacao_email', 'access_token', 'token_reset_senha'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
+            [['idioma_id'], 'exist', 'skipOnError' => true, 'targetClass' => Idioma::class, 'targetAttribute' => ['idioma_id' => 'id']],
         ];
     }
 
@@ -91,6 +105,8 @@ class Usuario extends ActiveRecord implements IdentityInterface
             'id' => Yii::t('app', 'Id'),
             'nome' => Yii::t('app', 'Nome'),
             'email' => Yii::t('app', 'Email'),
+            'foto_perfil' => Yii::t('app', 'Foto de perfil'),
+            'idioma_id' => Yii::t('app', 'Idioma'),
             'senha_hash' => Yii::t('app', 'Senha'),
             'auth_key' => Yii::t('app', 'Auth key'),
             'token_verificacao_email' => Yii::t('app', 'Token de verificação do email'),
@@ -102,6 +118,96 @@ class Usuario extends ActiveRecord implements IdentityInterface
             'ultimo_acesso' => Yii::t('app', 'Ultimo acesso em'),
             'data_cadastro' => Yii::t('app', 'Cadastrado em'),
         ];
+    }
+
+    /**
+     * Gets query for [[ClienteUsuarios]].
+     *
+     * @return \yii\db\ActiveQuery|ClienteUsuarioQuery
+     */
+    public function getClienteUsuarios()
+    {
+        return $this->hasMany(ClienteUsuario::class, ['usuario_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Clientes]].
+     *
+     * @return \yii\db\ActiveQuery|ClienteQuery
+     */
+    public function getClientes()
+    {
+        return $this->hasMany(Cliente::class, ['id' => 'cliente_id'])->viaTable('cliente_usuario', ['usuario_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Idioma]].
+     *
+     * @return \yii\db\ActiveQuery|IdiomaQuery
+     */
+    public function getIdioma()
+    {
+        return $this->hasOne(Idioma::class, ['id' => 'idioma_id']);
+    }
+
+    /**
+     * Gets query for [[Mensagems]].
+     *
+     * @return \yii\db\ActiveQuery|MensagemQuery
+     */
+    public function getMensagems()
+    {
+        return $this->hasMany(Mensagem::class, ['usuario_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Mensagems0]].
+     *
+     * @return \yii\db\ActiveQuery|MensagemQuery
+     */
+    public function getMensagems0()
+    {
+        return $this->hasMany(Mensagem::class, ['usuario_id_cad' => 'id']);
+    }
+
+    /**
+     * Gets query for [[NotificacaoSistemas]].
+     *
+     * @return \yii\db\ActiveQuery|NotificacaoSistemaQuery
+     */
+    public function getNotificacaoSistemas()
+    {
+        return $this->hasMany(NotificacaoSistema::class, ['usuario_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[TicketRespostas]].
+     *
+     * @return \yii\db\ActiveQuery|TicketRespostaQuery
+     */
+    public function getTicketRespostas()
+    {
+        return $this->hasMany(TicketResposta::class, ['usuario_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[TicketVotos]].
+     *
+     * @return \yii\db\ActiveQuery|TicketVotoQuery
+     */
+    public function getTicketVotos()
+    {
+        return $this->hasMany(TicketVoto::class, ['usuario_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Tickets]].
+     *
+     * @return \yii\db\ActiveQuery|TicketQuery
+     */
+    public function getTickets()
+    {
+        return $this->hasMany(Ticket::class, ['usuario_id' => 'id']);
     }
 
     /**

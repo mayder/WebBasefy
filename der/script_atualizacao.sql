@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2025-04-18 21:04
+-- Generated: 2025-04-18 21:13
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -10,9 +10,7 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 ALTER TABLE `basefy`.`usuario` 
-ADD COLUMN `foto_perfil` VARCHAR(45) NULL DEFAULT NULL AFTER `email`,
 ADD COLUMN `idioma_id` INT(11) NULL DEFAULT NULL AFTER `foto_perfil`,
-CHANGE COLUMN `data_cadastro` `data_cadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 ADD INDEX `fk_usuario_idioma1_idx` (`idioma_id` ASC) VISIBLE;
 ;
 
@@ -36,9 +34,7 @@ CREATE TABLE IF NOT EXISTS `basefy`.`funcionalidade` (
   INDEX `fk_funcionalidade_modulo1_idx` (`modulo_id` ASC) VISIBLE,
   CONSTRAINT `fk_funcionalidade_modulo1`
     FOREIGN KEY (`modulo_id`)
-    REFERENCES `basefy`.`modulo` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `basefy`.`modulo` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
@@ -47,20 +43,16 @@ CREATE TABLE IF NOT EXISTS `basefy`.`perfil_funcionalidade` (
   `perfil_id` INT(11) NOT NULL,
   `funcionalidade_id` INT(11) NOT NULL,
   `data_cadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  INDEX `fk_perfil_funcionalidade_perfil_idx` (`perfil_id` ASC) VISIBLE,
-  INDEX `fk_perfil_funcionalidade_funcionalidade1_idx` (`funcionalidade_id` ASC) VISIBLE,
   PRIMARY KEY (`id`),
+  INDEX `fk_perfil_funcionalidade_perfil_idx` (`perfil_id` ASC) VISIBLE,
   UNIQUE INDEX `uq_perfil_funcionalidade` (`perfil_id` ASC, `funcionalidade_id` ASC) VISIBLE,
-  CONSTRAINT `fk_perfil_funcionalidade_perfil`
-    FOREIGN KEY (`perfil_id`)
-    REFERENCES `basefy`.`perfil` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_perfil_funcionalidade_funcionalidade1_idx` (`funcionalidade_id` ASC) VISIBLE,
   CONSTRAINT `fk_perfil_funcionalidade_funcionalidade1`
     FOREIGN KEY (`funcionalidade_id`)
-    REFERENCES `basefy`.`funcionalidade` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `basefy`.`funcionalidade` (`id`),
+  CONSTRAINT `fk_perfil_funcionalidade_perfil`
+    FOREIGN KEY (`perfil_id`)
+    REFERENCES `basefy`.`perfil` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
@@ -74,9 +66,7 @@ CREATE TABLE IF NOT EXISTS `basefy`.`cliente` (
   INDEX `fk_cliente_plano1_idx` (`plano_id` ASC) VISIBLE,
   CONSTRAINT `fk_cliente_plano1`
     FOREIGN KEY (`plano_id`)
-    REFERENCES `basefy`.`plano` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `basefy`.`plano` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
@@ -97,25 +87,19 @@ CREATE TABLE IF NOT EXISTS `basefy`.`cliente_usuario` (
   `status` BIT(1) NOT NULL DEFAULT b'1',
   `data_cadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
+  UNIQUE INDEX `uq_cliente_usuario` (`cliente_id` ASC, `usuario_id` ASC) VISIBLE,
   INDEX `fk_cliente_usuario_cliente1_idx` (`cliente_id` ASC) VISIBLE,
   INDEX `fk_cliente_usuario_usuario1_idx` (`usuario_id` ASC) VISIBLE,
   INDEX `fk_cliente_usuario_perfil1_idx` (`perfil_id` ASC) VISIBLE,
-  UNIQUE INDEX `uq_cliente_usuario` (`cliente_id` ASC, `usuario_id` ASC) VISIBLE,
   CONSTRAINT `fk_cliente_usuario_cliente1`
     FOREIGN KEY (`cliente_id`)
-    REFERENCES `basefy`.`cliente` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_cliente_usuario_usuario1`
-    FOREIGN KEY (`usuario_id`)
-    REFERENCES `basefy`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `basefy`.`cliente` (`id`),
   CONSTRAINT `fk_cliente_usuario_perfil1`
     FOREIGN KEY (`perfil_id`)
-    REFERENCES `basefy`.`perfil` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `basefy`.`perfil` (`id`),
+  CONSTRAINT `fk_cliente_usuario_usuario1`
+    FOREIGN KEY (`usuario_id`)
+    REFERENCES `basefy`.`usuario` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
@@ -137,19 +121,15 @@ CREATE TABLE IF NOT EXISTS `basefy`.`plano_modulo` (
   `status` BIT(1) NOT NULL DEFAULT b'1',
   `data_cadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
+  UNIQUE INDEX `uq_plano_modulo` (`plano_id` ASC, `modulo_id` ASC) VISIBLE,
   INDEX `fk_plano_modulo_plano1_idx` (`plano_id` ASC) VISIBLE,
   INDEX `fk_plano_modulo_modulo1_idx` (`modulo_id` ASC) VISIBLE,
-  UNIQUE INDEX `uq_plano_modulo` (`plano_id` ASC, `modulo_id` ASC) VISIBLE,
-  CONSTRAINT `fk_plano_modulo_plano1`
-    FOREIGN KEY (`plano_id`)
-    REFERENCES `basefy`.`plano` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_plano_modulo_modulo1`
     FOREIGN KEY (`modulo_id`)
-    REFERENCES `basefy`.`modulo` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `basefy`.`modulo` (`id`),
+  CONSTRAINT `fk_plano_modulo_plano1`
+    FOREIGN KEY (`plano_id`)
+    REFERENCES `basefy`.`plano` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
@@ -164,9 +144,7 @@ CREATE TABLE IF NOT EXISTS `basefy`.`plano_restricao` (
   INDEX `fk_plano_restricao_plano1_idx` (`plano_id` ASC) VISIBLE,
   CONSTRAINT `fk_plano_restricao_plano1`
     FOREIGN KEY (`plano_id`)
-    REFERENCES `basefy`.`plano` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `basefy`.`plano` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
@@ -222,14 +200,10 @@ CREATE TABLE IF NOT EXISTS `basefy`.`mensagem` (
   INDEX `fk_mensagem_usuario2_idx` (`usuario_id_cad` ASC) VISIBLE,
   CONSTRAINT `fk_mensagem_usuario1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `basefy`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `basefy`.`usuario` (`id`),
   CONSTRAINT `fk_mensagem_usuario2`
     FOREIGN KEY (`usuario_id_cad`)
-    REFERENCES `basefy`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `basefy`.`usuario` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
@@ -246,9 +220,7 @@ CREATE TABLE IF NOT EXISTS `basefy`.`notificacao_sistema` (
   INDEX `fk_notificacao_sistema_usuario1_idx` (`usuario_id` ASC) VISIBLE,
   CONSTRAINT `fk_notificacao_sistema_usuario1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `basefy`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `basefy`.`usuario` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
@@ -264,32 +236,24 @@ CREATE TABLE IF NOT EXISTS `basefy`.`ticket` (
   `prioridade` ENUM('baixa', 'media', 'alta') NULL DEFAULT NULL,
   `voto` INT(11) NULL DEFAULT 0,
   `data_resposta` DATETIME NULL DEFAULT NULL,
-  `data_cadastro` TIMESTAMP NOT NULL DEFAULT current_timestamp,
+  `data_cadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `fk_ticket_usuario1_idx` (`usuario_id` ASC) VISIBLE,
   INDEX `fk_ticket_cliente1_idx` (`cliente_id` ASC) VISIBLE,
   INDEX `fk_ticket_ticket_tipo1_idx` (`tipo_id` ASC) VISIBLE,
   INDEX `fk_ticket_ticket_status1_idx` (`status_id` ASC) VISIBLE,
-  CONSTRAINT `fk_ticket_usuario1`
-    FOREIGN KEY (`usuario_id`)
-    REFERENCES `basefy`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_ticket_cliente1`
     FOREIGN KEY (`cliente_id`)
-    REFERENCES `basefy`.`cliente` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ticket_ticket_tipo1`
-    FOREIGN KEY (`tipo_id`)
-    REFERENCES `basefy`.`ticket_tipo` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `basefy`.`cliente` (`id`),
   CONSTRAINT `fk_ticket_ticket_status1`
     FOREIGN KEY (`status_id`)
-    REFERENCES `basefy`.`ticket_status` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `basefy`.`ticket_status` (`id`),
+  CONSTRAINT `fk_ticket_ticket_tipo1`
+    FOREIGN KEY (`tipo_id`)
+    REFERENCES `basefy`.`ticket_tipo` (`id`),
+  CONSTRAINT `fk_ticket_usuario1`
+    FOREIGN KEY (`usuario_id`)
+    REFERENCES `basefy`.`usuario` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
@@ -324,14 +288,10 @@ CREATE TABLE IF NOT EXISTS `basefy`.`ticket_voto` (
   INDEX `fk_ticket_voto_usuario1_idx` (`usuario_id` ASC) VISIBLE,
   CONSTRAINT `fk_ticket_voto_ticket1`
     FOREIGN KEY (`ticket_id`)
-    REFERENCES `basefy`.`ticket` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `basefy`.`ticket` (`id`),
   CONSTRAINT `fk_ticket_voto_usuario1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `basefy`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `basefy`.`usuario` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
@@ -347,23 +307,17 @@ CREATE TABLE IF NOT EXISTS `basefy`.`ticket_resposta` (
   INDEX `fk_ticket_resposta_usuario1_idx` (`usuario_id` ASC) VISIBLE,
   CONSTRAINT `fk_ticket_resposta_ticket1`
     FOREIGN KEY (`ticket_id`)
-    REFERENCES `basefy`.`ticket` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `basefy`.`ticket` (`id`),
   CONSTRAINT `fk_ticket_resposta_usuario1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `basefy`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `basefy`.`usuario` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 ALTER TABLE `basefy`.`usuario` 
 ADD CONSTRAINT `fk_usuario_idioma1`
   FOREIGN KEY (`idioma_id`)
-  REFERENCES `basefy`.`idioma` (`id`)
-  ON DELETE NO ACTION
-  ON UPDATE NO ACTION;
+  REFERENCES `basefy`.`idioma` (`id`);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -38,7 +38,40 @@ AppAsset::register($this);
         ]);
         $menuItems = [
             ['label' => 'Dashboard', 'url' => ['/site/index']],
+            ['label' => 'Clientes', 'url' => ['/cliente/index']],
             ['label' => 'Usuários', 'url' => ['/usuario/index']],
+            [
+                'label' => 'Tickets',
+                'items' => [
+                    ['label' => 'Tickets criados', 'url' => ['/ticket/index']],
+                    ['label' => 'Tipos de Ticket', 'url' => ['/ticket-tipo/index']],
+                    ['label' => 'Status de Ticket', 'url' => ['/ticket-status/index']],
+                ],
+            ],
+            [
+                'label' => 'Permissões',
+                'items' => [
+                    ['label' => 'Perfis', 'url' => ['/perfil/index']],
+                    ['label' => 'Funcionalidades', 'url' => ['/funcionalidade/index']]
+                ],
+            ],
+            [
+                'label' => 'Planos e Módulos',
+                'items' => [
+                    ['label' => 'Planos', 'url' => ['/plano/index']],
+                    ['label' => 'Módulos', 'url' => ['/modulo/index']],
+                ],
+            ],
+            [
+                'label' => 'Sistema',
+                'items' => [
+                    ['label' => 'Idiomas', 'url' => ['/idioma/index']],
+                    ['label' => 'Mensagens Pendentes', 'url' => ['/mensagem/index']],
+                    ['label' => 'Notificações do Sistema', 'url' => ['/notificacao-sistema/index']],
+                    ['label' => 'Fila de Jobs (Queue)', 'url' => ['/queue/index']],
+                    ['label' => 'Sessões Ativas', 'url' => ['/session/index']],
+                ],
+            ],
         ];
         if (Yii::$app->user->isGuest) {
             $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
