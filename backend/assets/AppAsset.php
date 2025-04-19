@@ -22,5 +22,6 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap5\BootstrapAsset',
         'yii\bootstrap5\BootstrapPluginAsset',
+        'app\assets\InputmaskAsset',
     ];
 }

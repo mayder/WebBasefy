@@ -45,4 +45,18 @@ return [
         ],
     ],
     'params' => $params,
+    'container' => [
+        'definitions' => [
+            \kartik\form\ActiveForm::class => [
+                'type' => \kartik\form\ActiveForm::TYPE_VERTICAL,
+                'formConfig' => ['labelSpan' => 3],
+            ],
+        ],
+    ],
+    'modules' => [
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module',
+            'bsVersion' => '5.x',
+        ],
+    ]
 ];
