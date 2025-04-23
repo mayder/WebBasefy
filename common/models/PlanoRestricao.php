@@ -49,12 +49,12 @@ class PlanoRestricao extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'plano_id' => Yii::t('app', 'Plano ID'),
+            'id' => Yii::t('app', 'Id'),
+            'plano_id' => Yii::t('app', 'Plano'),
             'chave' => Yii::t('app', 'Chave'),
             'valor' => Yii::t('app', 'Valor'),
             'tipo' => Yii::t('app', 'Tipo'),
-            'data_cadastro' => Yii::t('app', 'Data Cadastro'),
+            'data_cadastro' => Yii::t('app', 'Cadastrado em'),
         ];
     }
 
@@ -76,5 +76,4 @@ class PlanoRestricao extends \yii\db\ActiveRecord
     {
         return new PlanoRestricaoQuery(get_called_class());
     }
-
 }

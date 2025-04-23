@@ -48,10 +48,10 @@ class PerfilFuncionalidade extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'perfil_id' => Yii::t('app', 'Perfil ID'),
-            'funcionalidade_id' => Yii::t('app', 'Funcionalidade ID'),
-            'data_cadastro' => Yii::t('app', 'Data Cadastro'),
+            'id' => Yii::t('app', 'Id'),
+            'perfil_id' => Yii::t('app', 'Perfil'),
+            'funcionalidade_id' => Yii::t('app', 'Funcionalidade'),
+            'data_cadastro' => Yii::t('app', 'Cadastrado em'),
         ];
     }
 
@@ -83,5 +83,4 @@ class PerfilFuncionalidade extends \yii\db\ActiveRecord
     {
         return new PerfilFuncionalidadeQuery(get_called_class());
     }
-
 }

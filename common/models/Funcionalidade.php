@@ -50,11 +50,11 @@ class Funcionalidade extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', 'Id'),
             'nome' => Yii::t('app', 'Nome'),
             'chave' => Yii::t('app', 'Chave'),
-            'modulo_id' => Yii::t('app', 'Modulo ID'),
-            'data_cadastro' => Yii::t('app', 'Data Cadastro'),
+            'modulo_id' => Yii::t('app', 'Módulo'),
+            'data_cadastro' => Yii::t('app', 'Cadastrado em'),
         ];
     }
 
@@ -96,5 +96,4 @@ class Funcionalidade extends \yii\db\ActiveRecord
     {
         return new FuncionalidadeQuery(get_called_class());
     }
-
 }

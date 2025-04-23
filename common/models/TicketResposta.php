@@ -52,12 +52,12 @@ class TicketResposta extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'ticket_id' => Yii::t('app', 'Ticket ID'),
-            'usuario_id' => Yii::t('app', 'Usuario ID'),
-            'conteudo' => Yii::t('app', 'Conteudo'),
-            'publico' => Yii::t('app', 'Publico'),
-            'data_cadastro' => Yii::t('app', 'Data Cadastro'),
+            'id' => Yii::t('app', 'Id'),
+            'ticket_id' => Yii::t('app', 'Ticket'),
+            'usuario_id' => Yii::t('app', 'Usuário'),
+            'conteudo' => Yii::t('app', 'Conteúdo'),
+            'publico' => Yii::t('app', 'Público'),
+            'data_cadastro' => Yii::t('app', 'Cadastrado em'),
         ];
     }
 
@@ -89,5 +89,4 @@ class TicketResposta extends \yii\db\ActiveRecord
     {
         return new TicketRespostaQuery(get_called_class());
     }
-
 }

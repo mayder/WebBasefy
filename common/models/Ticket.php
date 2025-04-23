@@ -73,18 +73,18 @@ class Ticket extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'usuario_id' => Yii::t('app', 'Usuario ID'),
-            'cliente_id' => Yii::t('app', 'Cliente ID'),
-            'titulo' => Yii::t('app', 'Titulo'),
-            'descricao' => Yii::t('app', 'Descricao'),
-            'tipo_id' => Yii::t('app', 'Tipo ID'),
-            'status_id' => Yii::t('app', 'Status ID'),
-            'publico' => Yii::t('app', 'Publico'),
+            'id' => Yii::t('app', 'Id'),
+            'usuario_id' => Yii::t('app', 'Usuário'),
+            'cliente_id' => Yii::t('app', 'Cliente'),
+            'titulo' => Yii::t('app', 'Tútulo'),
+            'descricao' => Yii::t('app', 'Descrição'),
+            'tipo_id' => Yii::t('app', 'Tipo'),
+            'status_id' => Yii::t('app', 'Status'),
+            'publico' => Yii::t('app', 'Público'),
             'prioridade' => Yii::t('app', 'Prioridade'),
             'voto' => Yii::t('app', 'Voto'),
-            'data_resposta' => Yii::t('app', 'Data Resposta'),
-            'data_cadastro' => Yii::t('app', 'Data Cadastro'),
+            'data_resposta' => Yii::t('app', 'Data da resposta'),
+            'data_cadastro' => Yii::t('app', 'Cadastrado em'),
         ];
     }
 

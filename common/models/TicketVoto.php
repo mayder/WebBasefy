@@ -57,12 +57,12 @@ class TicketVoto extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'ticket_id' => Yii::t('app', 'Ticket ID'),
-            'usuario_id' => Yii::t('app', 'Usuario ID'),
+            'id' => Yii::t('app', 'Id'),
+            'ticket_id' => Yii::t('app', 'Ticket'),
+            'usuario_id' => Yii::t('app', 'Usuário'),
             'voto' => Yii::t('app', 'Voto'),
-            'observacao' => Yii::t('app', 'Observacao'),
-            'data_cadastro' => Yii::t('app', 'Data Cadastro'),
+            'observacao' => Yii::t('app', 'Observação'),
+            'data_cadastro' => Yii::t('app', 'Cadastrado em'),
         ];
     }
 

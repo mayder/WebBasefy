@@ -52,12 +52,12 @@ class Modulo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', 'Id'),
             'nome' => Yii::t('app', 'Nome'),
             'icone' => Yii::t('app', 'Icone'),
             'ordem' => Yii::t('app', 'Ordem'),
             'status' => Yii::t('app', 'Status'),
-            'data_cadastro' => Yii::t('app', 'Data Cadastro'),
+            'data_cadastro' => Yii::t('app', 'Cadastrado em'),
         ];
     }
 
@@ -99,5 +99,4 @@ class Modulo extends \yii\db\ActiveRecord
     {
         return new ModuloQuery(get_called_class());
     }
-
 }

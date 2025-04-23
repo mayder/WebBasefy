@@ -50,11 +50,11 @@ class Perfil extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', 'Id'),
             'nome' => Yii::t('app', 'Nome'),
             'sigla' => Yii::t('app', 'Sigla'),
             'status' => Yii::t('app', 'Status'),
-            'data_cadastro' => Yii::t('app', 'Data Cadastro'),
+            'data_cadastro' => Yii::t('app', 'Cadastrado em'),
         ];
     }
 
@@ -96,5 +96,4 @@ class Perfil extends \yii\db\ActiveRecord
     {
         return new PerfilQuery(get_called_class());
     }
-
 }

@@ -54,12 +54,12 @@ class ClienteUsuario extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'cliente_id' => Yii::t('app', 'Cliente ID'),
-            'usuario_id' => Yii::t('app', 'Usuario ID'),
-            'perfil_id' => Yii::t('app', 'Perfil ID'),
+            'id' => Yii::t('app', 'Id'),
+            'cliente_id' => Yii::t('app', 'Cliente'),
+            'usuario_id' => Yii::t('app', 'Usuário'),
+            'perfil_id' => Yii::t('app', 'Perfil'),
             'status' => Yii::t('app', 'Status'),
-            'data_cadastro' => Yii::t('app', 'Data Cadastro'),
+            'data_cadastro' => Yii::t('app', 'Cadastrado em'),
         ];
     }
 
@@ -101,5 +101,4 @@ class ClienteUsuario extends \yii\db\ActiveRecord
     {
         return new ClienteUsuarioQuery(get_called_class());
     }
-
 }

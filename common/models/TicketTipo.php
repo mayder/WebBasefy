@@ -48,11 +48,11 @@ class TicketTipo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', 'Id'),
             'nome' => Yii::t('app', 'Nome'),
-            'publico' => Yii::t('app', 'Publico'),
+            'publico' => Yii::t('app', 'Público?'),
             'status' => Yii::t('app', 'Status'),
-            'data_cadastro' => Yii::t('app', 'Data Cadastro'),
+            'data_cadastro' => Yii::t('app', 'Cadastrado em'),
         ];
     }
 
@@ -74,5 +74,4 @@ class TicketTipo extends \yii\db\ActiveRecord
     {
         return new TicketTipoQuery(get_called_class());
     }
-
 }

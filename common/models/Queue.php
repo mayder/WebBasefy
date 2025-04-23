@@ -49,7 +49,7 @@ class Queue extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', 'Id'),
             'channel' => Yii::t('app', 'Channel'),
             'job' => Yii::t('app', 'Job'),
             'pushed_at' => Yii::t('app', 'Pushed At'),
@@ -69,5 +69,4 @@ class Queue extends \yii\db\ActiveRecord
     {
         return new QueueQuery(get_called_class());
     }
-
 }

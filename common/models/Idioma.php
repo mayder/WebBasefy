@@ -50,12 +50,12 @@ class Idioma extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', 'Id'),
             'nome' => Yii::t('app', 'Nome'),
             'sigla' => Yii::t('app', 'Sigla'),
             'status' => Yii::t('app', 'Status'),
-            'padrao' => Yii::t('app', 'Padrao'),
-            'data_cadastro' => Yii::t('app', 'Data Cadastro'),
+            'padrao' => Yii::t('app', 'Padrão?'),
+            'data_cadastro' => Yii::t('app', 'Cadastrado em'),
         ];
     }
 
@@ -77,5 +77,4 @@ class Idioma extends \yii\db\ActiveRecord
     {
         return new IdiomaQuery(get_called_class());
     }
-
 }

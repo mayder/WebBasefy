@@ -1,45 +1,104 @@
 <?php
+
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
+use common\models\Usuario;
+use common\models\Cliente;
+use common\models\TicketTipo;
+use common\models\TicketStatus;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Ticket */
-/* @var $form yii\widgets\ActiveForm */
+
+$isAjax = Yii::$app->request->isAjax;
 ?>
 
 <div class="ticket-form">
+    <?php $form = ActiveForm::begin([
+        'options' => ['autocomplete' => 'off'],
+    ]); ?>
 
-    <?php $form = ActiveForm::begin(); ?>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <?= $form->field($model, 'usuario_id')->dropDownList(
+                Usuario::find()->select(['nome', 'id'])->indexBy('id')->column(),
+                ['prompt' => Yii::t('app', 'Selecione o usuário...')]
+            ) ?>
+        </div>
 
-    <?= $form->field($model, 'usuario_id')->textInput() ?>
+        <div class="col-md-6 mb-3">
+            <?= $form->field($model, 'cliente_id')->dropDownList(
+                Cliente::find()->select(['nome_fantasia', 'id'])->indexBy('id')->column(),
+                ['prompt' => Yii::t('app', 'Selecione o cliente...')]
+            ) ?>
+        </div>
 
-    <?= $form->field($model, 'cliente_id')->textInput() ?>
+        <div class="col-md-12 mb-3">
+            <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
+        <div class="col-md-12 mb-3">
+            <?= $form->field($model, 'descricao')->textarea(['rows' => 4]) ?>
+        </div>
 
-    <?= $form->field($model, 'descricao')->textarea(['rows' => 6]) ?>
+        <div class="col-md-6 mb-3">
+            <?= $form->field($model, 'tipo_id')->dropDownList(
+                TicketTipo::find()->select(['nome', 'id'])->indexBy('id')->column(),
+                ['prompt' => Yii::t('app', 'Selecione o tipo...')]
+            ) ?>
+        </div>
 
-    <?= $form->field($model, 'tipo_id')->textInput() ?>
+        <div class="col-md-6 mb-3">
+            <?= $form->field($model, 'status_id')->dropDownList(
+                TicketStatus::find()->select(['nome', 'id'])->indexBy('id')->column(),
+                ['prompt' => Yii::t('app', 'Selecione...')]
+            ) ?>
+        </div>
 
-    <?= $form->field($model, 'status_id')->textInput() ?>
+        <div class="col-md-6 mb-3">
+            <?= $form->field($model, 'prioridade')->dropDownList([
+                'baixa' => Yii::t('app', 'Baixa'),
+                'media' => Yii::t('app', 'Média'),
+                'alta' => Yii::t('app', 'Alta'),
+            ], ['prompt' => Yii::t('app', 'Selecione a prioridade...')]) ?>
+        </div>
 
-    <?= $form->field($model, 'publico')->checkbox() ?>
+        <div class="col-md-6 mb-3">
+            <?= $form->field($model, 'voto')->textInput(['type' => 'number']) ?>
+        </div>
 
-    <?= $form->field($model, 'prioridade')->dropDownList([ 'baixa' => 'Baixa', 'media' => 'Media', 'alta' => 'Alta', ], ['prompt' => '']) ?>
+        <div class="col-md-6 mb-3">
+            <?= $form->field($model, 'data_resposta')->textInput(['type' => 'datetime-local']) ?>
+        </div>
 
-    <?= $form->field($model, 'voto')->textInput() ?>
+        <div class="col-md-6 mb-3">
+            <?= $form->field($model, 'data_cadastro')->textInput(['type' => 'datetime-local']) ?>
+        </div>
 
-    <?= $form->field($model, 'data_resposta')->textInput() ?>
+        <div class="form-check form-switch mt-3 ms-3">
+            <?= $form->field($model, 'publico', [
+                'template' => '{input}{label}{error}',
+                'options' => ['class' => 'form-check'],
+            ])->checkbox([
+                'class' => 'form-check-input',
+                'role' => 'switch',
+                'labelOptions' => ['class' => 'form-check-label ms-2'],
+                'uncheck' => 0,
+                'value' => 1,
+            ]) ?>
+        </div>
+    </div>
 
-    <?= $form->field($model, 'data_cadastro')->textInput() ?>
-
-  
-	<?php if (!Yii::$app->request->isAjax){ ?>
-	  	<div class="form-group">
-	        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-	    </div>
-	<?php } ?>
+    <?php if (!$isAjax): ?>
+        <div class="form-group mt-3 text-end">
+            <?= Html::submitButton(
+                $model->isNewRecord
+                    ? '<i class="bi bi-check-circle me-1"></i> ' . Yii::t('app', 'Criar')
+                    : '<i class="bi bi-pencil-square me-1"></i> ' . Yii::t('app', 'Atualizar'),
+                ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']
+            ) ?>
+        </div>
+    <?php endif; ?>
 
     <?php ActiveForm::end(); ?>
-    
 </div>

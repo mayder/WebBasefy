@@ -44,7 +44,7 @@ class Session extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', 'Id'),
             'expire' => Yii::t('app', 'Expire'),
             'data' => Yii::t('app', 'Data'),
         ];
@@ -58,5 +58,4 @@ class Session extends \yii\db\ActiveRecord
     {
         return new SessionQuery(get_called_class());
     }
-
 }

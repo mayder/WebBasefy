@@ -1,14 +1,29 @@
 <?php
-
 use yii\helpers\Html;
 
+/* @var \$this yii\web\View */
+/* @var \$model common\models\Cliente */
 
-/* @var $this yii\web\View */
-/* @var $model common\models\Cliente */
+$isModal = Yii::$app->request->isAjax;
 
+if (!$isModal): 
 ?>
-<div class="cliente-create">
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+<div class="container-fluid py-3">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">
+                <i class="bi bi-plus-circle me-1"></i> <?= Yii::t('app', 'Novo Cliente') ?>
+            </h5>
+        </div>
+        <div class="card-body">
+            <?php endif; ?>
+
+            <?= $this->render('_form', [
+            'model' => $model,
+            ]) ?>
+
+            <?php if (!$isModal): ?>
+        </div>
+    </div>
 </div>
+<?php endif; ?>

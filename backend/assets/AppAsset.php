@@ -16,7 +16,7 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
-        'https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/4.0.9/jquery.inputmask.bundle.min.js',
+        'js/custom.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

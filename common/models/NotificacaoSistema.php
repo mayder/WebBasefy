@@ -62,14 +62,14 @@ class NotificacaoSistema extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'usuario_id' => Yii::t('app', 'Usuario ID'),
-            'titulo' => Yii::t('app', 'Titulo'),
-            'conteudo' => Yii::t('app', 'Conteudo'),
+            'id' => Yii::t('app', 'Id'),
+            'usuario_id' => Yii::t('app', 'Usuário'),
+            'titulo' => Yii::t('app', 'Tútulo'),
+            'conteudo' => Yii::t('app', 'Conteúdo'),
             'tipo' => Yii::t('app', 'Tipo'),
             'link' => Yii::t('app', 'Link'),
-            'lida' => Yii::t('app', 'Lida'),
-            'data_cadastro' => Yii::t('app', 'Data Cadastro'),
+            'lida' => Yii::t('app', 'Lida?'),
+            'data_cadastro' => Yii::t('app', 'Cadastrado em'),
         ];
     }
 

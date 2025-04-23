@@ -52,11 +52,11 @@ class Cliente extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', 'Id'),
             'nome' => Yii::t('app', 'Nome'),
-            'plano_id' => Yii::t('app', 'Plano ID'),
+            'plano_id' => Yii::t('app', 'Plano'),
             'status' => Yii::t('app', 'Status'),
-            'data_cadastro' => Yii::t('app', 'Data Cadastro'),
+            'data_cadastro' => Yii::t('app', 'Cadastrado em'),
         ];
     }
 
@@ -108,5 +108,4 @@ class Cliente extends \yii\db\ActiveRecord
     {
         return new ClienteQuery(get_called_class());
     }
-
 }

@@ -51,11 +51,11 @@ class PlanoModulo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'plano_id' => Yii::t('app', 'Plano ID'),
-            'modulo_id' => Yii::t('app', 'Modulo ID'),
+            'id' => Yii::t('app', 'Id'),
+            'plano_id' => Yii::t('app', 'Plano'),
+            'modulo_id' => Yii::t('app', 'Módulo'),
             'status' => Yii::t('app', 'Status'),
-            'data_cadastro' => Yii::t('app', 'Data Cadastro'),
+            'data_cadastro' => Yii::t('app', 'Cadastrado em'),
         ];
     }
 
@@ -87,5 +87,4 @@ class PlanoModulo extends \yii\db\ActiveRecord
     {
         return new PlanoModuloQuery(get_called_class());
     }
-
 }

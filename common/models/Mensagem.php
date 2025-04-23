@@ -75,19 +75,19 @@ class Mensagem extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', 'Id'),
             'tipo' => Yii::t('app', 'Tipo'),
-            'usuario_id' => Yii::t('app', 'Usuario ID'),
-            'titulo' => Yii::t('app', 'Titulo'),
-            'conteudo' => Yii::t('app', 'Conteudo'),
-            'status_envio' => Yii::t('app', 'Status Envio'),
+            'usuario_id' => Yii::t('app', 'Usuário'),
+            'titulo' => Yii::t('app', 'Título'),
+            'conteudo' => Yii::t('app', 'Conteúdo'),
+            'status_envio' => Yii::t('app', 'Status do envio'),
             'tentativa' => Yii::t('app', 'Tentativa'),
-            'max_tentativa' => Yii::t('app', 'Max Tentativa'),
-            'data_agendada' => Yii::t('app', 'Data Agendada'),
-            'data_envio' => Yii::t('app', 'Data Envio'),
+            'max_tentativa' => Yii::t('app', 'Máximo de tentativas'),
+            'data_agendada' => Yii::t('app', 'Agendada para'),
+            'data_envio' => Yii::t('app', 'Enviado em'),
             'erro' => Yii::t('app', 'Erro'),
-            'usuario_id_cad' => Yii::t('app', 'Usuario Id Cad'),
-            'data_cadastro' => Yii::t('app', 'Data Cadastro'),
+            'usuario_id_cad' => Yii::t('app', 'Cadastrado por'),
+            'data_cadastro' => Yii::t('app', 'Cadastrado em'),
         ];
     }
 
